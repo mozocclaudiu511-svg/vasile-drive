@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VASILE DRIVE</title>
+
+<style>
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #080b12;
+  --panel: #111827;
+  --border: #263348;
+  --blue: #48a5ff;
+  --text: #f5f8ff;
+  --muted: #8998af;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #102a48, transparent 55%), var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  transition: background .3s, color .3s;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 5%;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.logo span, h1 span, .creator { color: var(--blue); }
+
+.time {
+  text-align: right;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: right;
+}
+
+main {
+  max-width: 1250px;
+  margin: auto;
+  padding: 30px 4%;
+}
+
+.hero { padding: 20px 0 35px; }
+
+.eyebrow {
+  color: var(--blue);
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  letter-spacing: -2px;
+  margin: 14px 0;
+}
+
+h1 span { text-shadow: 0 0 30px #168bff55; }
+
+.subtitle { color: var(--muted); }
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #8ee9b0;
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #53e995;
+  box-shadow: 0 0 12px #53e995;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: linear-gradient(145deg, #151f30, #0e1522);
+  border: 1px solid var(--border);
+  border-radius: 23px;
+  padding: 23px;
+  min-height: 190px;
+  box-shadow: 0 12px 35px #0002;
+}
+
+.card h2 { font-size: 18px; }
+
+.icon { font-size: 27px; }
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+button {
+  cursor: pointer;
+  color: white;
+  background: #1c2b40;
+  border: 1px solid #31435c;
+  border-radius: 13px;
+  padding: 14px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: .2s;
+  width: 100%;
+}
+
+button:hover {
+  background: #263f5d;
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.primary {
+  background: linear-gradient(110deg, #087cf0, #35a9ff);
+  border: none;
+}
+
+.actions {
+  display: grid;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.wide { grid-column: span 2; }
+
+footer {
+  text-align: center;
+  padding: 30px 12px;
+  color: #64748b;
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
+.creator {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px #168bff66;
+}
+
+.light {
+  --bg: #eaf1fa;
+  --panel: #fff;
+  --border: #cbd8e8;
+  --text: #142238;
+  --muted: #5e6e84;
+  background: #eaf1fa;
+}
+
+.light .card { background: #fff; }
+.light header { border-color: var(--border); }
+.light button { color: #fff; }
+
+@media (max-width: 750px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wide { grid-column: span 2; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+  .wide { grid-column: span 1; }
+  h1 { font-size: 40px; }
+  .card { padding: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">VASILE<span> DRIVE</span></div>
+  <div>
+    <div class="time" id="clock">00:00</div>
+    <div class="date" id="date"></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">SISTEM MULTIMEDIA PERSONAL</div>
+    <h1>SALUT <span>VASILE.</span></h1>
+    <p class="subtitle">Totul pregătit pentru următoarea călătorie.</p>
+    <div class="status">
+      <span class="dot"></span>
+      INTERFAȚĂ ACTIVĂ
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <div class="icon">🧭</div>
+      <h2>Navigație</h2>
+      <p class="muted">Găsește traseul și planifică destinația.</p>
+      <div class="actions">
+        <button class="primary" onclick="openLink('https://maps.google.com')">📍 Google Maps ↗</button>
+        <button onclick="openLink('https://www.waze.com/live-map/')">Waze ↗</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">♫</div>
+      <h2>Muzica ta</h2>
+      <p class="muted">Ascultă melodiile preferate.</p>
+      <div class="actions">
+        <button onclick="openLink('https://music.youtube.com')">YouTube Music ↗</button>
+        <button onclick="openLink('https://open.spotify.com')">Spotify ↗</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚙</div>
+      <h2>Control rapid</h2>
+      <p class="muted">Personalizează ecranul mașinii.</p>
+      <div class="actions">
+        <button onclick="fullScreen()">⛶ Ecran complet</button>
+        <button onclick="changeTheme()">☼ Schimbă tema</button>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <div class="icon">🚘</div>
+      <h2>Bun venit la bord, Vasile!</h2>
+      <p class="muted">
+        Un ecran simplu, elegant și personalizat.
+        Hărțile și serviciile muzicale necesită internet.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📅</div>
+      <h2>Astăzi</h2>
+      <p class="muted" id="today">Să ai o zi frumoasă!</p>
+      <div class="actions">
+        <button onclick="showDate()">Vezi data completă</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  VASILE DRIVE · PERSONAL CAR INTERFACE
+  <div class="creator">CREATĂ DE MOZOC CLAUDIU</div>
+</footer>
+
+<script>
+function updateTime() {
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("ro-RO", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("ro-RO", {
+      weekday: "short",
+      day: "numeric",
+      month: "long"
+    });
+
+  document.getElementById("today").textContent =
+    now.toLocaleDateString("ro-RO", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+}
+
+updateTime();
+setInterval(updateTime, 1000);
+
+function openLink(url) {
+  window.open(url, "_blank");
+}
+
+function fullScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen()
+      .catch(() => alert("Apasă F11 pentru ecran complet."));
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+function changeTheme() {
+  document.body.classList.toggle("light");
+}
+
+function showDate() {
+  alert(new Date().toLocaleDateString("ro-RO", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }));
+}
+</script>
+
+</body>
+</html>
